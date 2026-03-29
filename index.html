@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ER Boutique</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<!-- PLACE TON LOGO -->
+<img src="logo.png" id="logo">
+<h1>ER BOUTIQUE</h1>
+
+</div>
+
+<input type="text" id="search" placeholder="Rechercher un produit..." onkeyup="searchProduct()">
+
+</header>
+
+
+<section class="products" id="products"></section>
+
+
+<div class="cart">
+
+<h3>Panier</h3>
+
+<ul id="cart-items"></ul>
+
+<p>Total : <span id="total">0</span> Fcfa</p>
+
+<button onclick="showCheckout()">Commander</button>
+
+</div>
+
+
+<section id="checkout" class="checkout">
+
+<h2>Commande</h2>
+
+<input id="customerName" placeholder="Nom">
+
+<input id="phone" placeholder="Téléphone">
+
+<select id="city">
+<option>Libreville</option>
+<option>Ntoum</option>
+</select>
+
+<input id="address" placeholder="Adresse">
+
+<button onclick="confirmOrder()">Valider commande</button>
+
+</section>
+
+
+<section class="admin-login">
+
+<h2>Admin</h2>
+
+<input type="password" id="adminPass">
+
+<button onclick="loginAdmin()">Connexion</button>
+
+</section>
+
+
+<section id="adminPanel" class="admin">
+
+<h2>Dashboard Administrateur</h2>
+
+<div class="stats">
+
+<div>
+<h3 id="totalProducts"></h3>
+<p>Produits</p>
+</div>
+
+<div>
+<h3 id="totalOrders"></h3>
+<p>Commandes</p>
+</div>
+
+</div>
+
+<h3>Ajouter produit</h3>
+
+<input id="name" placeholder="Nom">
+
+<input id="price" type="number" placeholder="Prix">
+
+<input id="stock" type="number" placeholder="Stock">
+
+<input id="image" placeholder="Image URL">
+
+<button onclick="addProduct()">Ajouter</button>
+
+<h3>Commandes clients</h3>
+
+<ul id="orders"></ul>
+
+</section>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
