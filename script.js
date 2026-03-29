@@ -208,9 +208,9 @@ message+="- "+p.name+" ("+p.price+"Fcfa)%0A"
 
 message+="%0ATotal : "+total+"Fcfa"
 
-let numero="24166366683"
+let numero="+24166366683"
 
-let url="https://wa.me/+24166366683"+numero+"?text="+message
+let url="https://wa.me/24166366683"+numero+"?text="+message
 
 window.open(url)
 
