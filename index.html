@@ -1,113 +1,82 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ER Boutique</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER-boutiques | Mode Enfantine</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
-<header>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="logo.png" alt="ER-boutiques Logo" class="client-logo">
+                </a>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i data-lucide="shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
 
-<div class="logo">
-<!-- PLACE TON LOGO -->
-<img src="logo.png" id="logo">
-<h1>ER BOUTIQUE</h1>
+    <main>
+        <section class="hero">
+            <h2>Mode Enfantine & Bébé</h2>
+            <p>Livraison à Libreville et Ntoum</p>
+        </section>
 
-</div>
+        <div class="products-grid" id="products-container"></div>
+    </main>
 
-<input type="text" id="search" placeholder="Rechercher un produit..." onkeyup="searchProduct()">
+    <footer>
+        <p>&copy; 2026 ER-boutiques. Tous droits réservés.</p>
+        <p class="signature">Développé par <strong>NEJ-Dev</strong></p>
+    </footer>
 
-</header>
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Ma Commande</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items-list"></div>
+        <div class="cart-footer">
+            <div class="delivery-form">
+                <h4>Livraison</h4>
+                <input type="text" id="cust-name" placeholder="Nom complet">
+                <input type="tel" id="cust-phone" placeholder="Téléphone">
+                <select id="cust-city" onchange="updateQuarters()">
+                    <option value="">Choisir la ville</option>
+                    <option value="Libreville">Libreville</option>
+                    <option value="Ntoum">Ntoum</option>
+                </select>
+                <select id="cust-quarter">
+                    <option value="">Choisir le quartier</option>
+                </select>
+            </div>
+            <div class="total-container">
+                <span>Total :</span>
+                <span id="cart-total">0</span> FCFA
+            </div>
+            <button class="btn-whatsapp" onclick="sendOrder()">
+                <i data-lucide="message-circle"></i> Commander sur WhatsApp
+            </button>
+        </div>
+    </div>
 
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <i data-lucide="check-circle" class="success-icon"></i>
+            <h3>Commande prête !</h3>
+            <p>Envoi vers le WhatsApp Business (+241 66366683).</p>
+            <button class="btn-confirm" onclick="finalWhatsAppRedirect()">Confirmer</button>
+        </div>
+    </div>
 
-<section class="products" id="products"></section>
-
-
-<div class="cart">
-
-<h3>Panier</h3>
-
-<ul id="cart-items"></ul>
-
-<p>Total : <span id="total">0</span> Fcfa</p>
-
-<button onclick="showCheckout()">Commander</button>
-
-</div>
-
-
-<section id="checkout" class="checkout">
-
-<h2>Commande</h2>
-
-<input id="customerName" placeholder="Nom">
-
-<input id="phone" placeholder="Téléphone">
-
-<select id="city">
-<option>Libreville</option>
-<option>Ntoum</option>
-</select>
-
-<input id="address" placeholder="Adresse">
-
-<button onclick="confirmOrder()">Valider commande</button>
-
-</section>
-
-
-<section class="admin-login">
-
-<h2>Admin</h2>
-
-<input type="password" id="adminPass">
-
-<button onclick="loginAdmin()">Connexion</button>
-
-</section>
-
-
-<section id="adminPanel" class="admin">
-
-<h2>Dashboard Administrateur</h2>
-
-<div class="stats">
-
-<div>
-<h3 id="totalProducts"></h3>
-<p>Produits</p>
-</div>
-
-<div>
-<h3 id="totalOrders"></h3>
-<p>Commandes</p>
-</div>
-
-</div>
-
-<h3>Ajouter produit</h3>
-
-<input id="name" placeholder="Nom">
-
-<input id="price" type="number" placeholder="Prix">
-
-<input id="stock" type="number" placeholder="Stock">
-
-<input id="image" placeholder="Image URL">
-
-<button onclick="addProduct()">Ajouter</button>
-
-<h3>Commandes clients</h3>
-
-<ul id="orders"></ul>
-
-</section>
-
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

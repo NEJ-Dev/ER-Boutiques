@@ -1,320 +1,95 @@
+const products = [
+    { id: 1, name: "Ensemble Enfants 2-3ans", price: 2000, img: "images vetements/IMG-20260327-WA0111.jpg" },
+    { id: 2, name: "Robe Princesse Fille 3-5ans", price: 2000, img: "images vetements/IMG-20260327-WA0026_041416.jpg" },
+    { id: 3, name: "Robe Princesse Fille 4-5ans", price: 2000, img: "images vetements/IMG-20260327-WA0114.jpg" },
+    { id: 4, name: "Robe Princesse Fille 7-8ans", price: 2000, img: "images vetements/IMG-20260327-WA0025_041419.jpg" },
+    { id: 5, name: "Robe Princesse Fille 5-7ans", price: 2000, img: "images vetements/IMG-20260327-WA0110.jpg" },
+    { id: 6, name: "Robe Princesse Fille 10-12ans", price: 2000, img: "images vetements/IMG-20260327-WA0115.jpg" },
+    { id: 7, name: "Robe Princesse Fille 6-7ans", price: 2000, img: "images vetements/IMG-20260327-WA0113.jpg" },
+    { id: 8, name: "Robe Princesse Fille 6-7ans", price: 2000, img: "images vetements/IMG-20260327-WA0031_041410.jpg" },
+    { id: 9, name: "Robe Princesse Fille 3-5ans", price: 2000, img: "images vetements/IMG-20260327-WA0112.jpg" },
+    { id: 10, name: "Ensemble Enfants 5-6ans", price: 2000, img: "images vetements/IMG-20260327-WA0030_041414.jpg" },
+    { id: 11, name: "Ensemble Enfants 18-24mois", price: 2000, img: "images vetements/IMG-20260329-WA0235_104533.jpg" },
+    { id: 12, name: "Ensemble Enfants 5-6ans", price: 2000, img: "images vetements/IMG-20260329-WA0236_104528.jpg" },
+];
 
-let cart=[]
+const zones = {
+    "Libreville": ["Campagne", "Akanda", "Nzeng-Ayong", "Rio", "Gare Routière"],
+    "Ntoum": ["Ntoum Centre", "Mairie", "Préfecture", "Nkan"]
+};
 
-let products=[
-{
-name:"Robe Enfants 4-5ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0114.jpg"
-},
-{
-name:"Robe Enfants 5-7ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0110.jpg"
-},
-{
-name:"Robe Enfants 10 -12ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0115.jpg"
-},
-{
-name:"Ensemble Enfants 2-3ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0111.jpg"
-},
-{
-name:"Robe Enfants 3-5ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0112.jpg"
-},
-{
-name:"Robe Enfants 6-7ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0113.jpg"
-},
-{
-name:"Robe Enfants 6-7ans",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0025_041419.jpg"
-},
-{
-name:"Robe Enfants",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0026_041416.jpg"
-},
-{
-name:"Ensemble Tee-Shirts Culottes Enfants",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0030_041414.jpg"
-},
-{
-name:"Robe Enfants",
-price:2000,
-stock:10,
-image:"images vetements/IMG-20260327-WA0031_041410.jpg"
-},
-]
+let cart = [];
+let waLink = "";
 
-let orders=JSON.parse(localStorage.getItem("orders")) || []
-
-const adminPassword="ER2026"
-
-
-
-function renderProducts(){
-
-const container=document.getElementById("products")
-
-container.innerHTML=""
-
-products.forEach((p,i)=>{
-
-let card=document.createElement("div")
-
-card.className="card"
-
-card.innerHTML=`
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<p>${p.price} Fcfa</p>
-
-<p>Stock : ${p.stock}</p>
-
-<button onclick="addToCart(${i})" ${p.stock==0?'disabled':''}>
-Ajouter au panier
-</button>
-
-`
-
-container.appendChild(card)
-
-})
-
+function init() {
+    const container = document.getElementById('products-container');
+    container.innerHTML = products.map(p => `
+        <div class="product-card">
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p style="color:#ff8fab; font-weight:bold;">${p.price.toLocaleString()} FCFA</p>
+            <button class="btn-add" onclick="addToCart(${p.id})">Ajouter</button>
+        </div>
+    `).join('');
 }
 
-
-
-function addToCart(i){
-
-let product=products[i]
-
-if(product.stock>0){
-
-cart.push(product)
-
-product.stock--
-
-renderProducts()
-
-renderCart()
-
+function updateQuarters() {
+    const city = document.getElementById('cust-city').value;
+    const quarterSelect = document.getElementById('cust-quarter');
+    quarterSelect.innerHTML = '<option value="">Choisir le quartier</option>';
+    if (city && zones[city]) {
+        zones[city].forEach(q => {
+            const opt = document.createElement('option');
+            opt.value = q; opt.textContent = q;
+            quarterSelect.appendChild(opt);
+        });
+    }
 }
 
+function addToCart(id) {
+    cart.push(products.find(p => p.id === id));
+    updateUI();
 }
 
-
-
-function renderCart(){
-
-let list=document.getElementById("cart-items")
-
-list.innerHTML=""
-
-let total=0
-
-cart.forEach(p=>{
-
-let li=document.createElement("li")
-
-li.textContent=p.name+" - "+p.price+" Fcfa"
-
-list.appendChild(li)
-
-total+=p.price
-
-})
-
-document.getElementById("total").textContent=total
-
+function updateUI() {
+    document.getElementById('cart-count').innerText = cart.length;
+    const list = document.getElementById('cart-items-list');
+    list.innerHTML = cart.map((item, i) => `
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px;">
+            <span>${item.name}</span>
+            <button onclick="remove(${i})" style="color:red; border:none; background:none; cursor:pointer;">&times;</button>
+        </div>
+    `).join('');
+    const total = cart.reduce((s, item) => s + item.price, 0);
+    document.getElementById('cart-total').innerText = total.toLocaleString();
 }
 
+function remove(i) { cart.splice(i, 1); updateUI(); }
+function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
 
+function sendOrder() {
+    const name = document.getElementById('cust-name').value;
+    const phone = document.getElementById('cust-phone').value;
+    const city = document.getElementById('cust-city').value;
+    const quarter = document.getElementById('cust-quarter').value;
 
-function searchProduct(){
+    if (cart.length === 0 || !name || !phone || !city || !quarter) return alert("Infos manquantes !");
 
-let input=document.getElementById("search").value.toLowerCase()
+    let message = "*Nouvelle commande ER-boutiques*\n\n";
+    message += `*Nom :* ${name}\n*Téléphone :* ${phone}\n*Ville :* ${city}\n*Adresse :* ${quarter}, Gabon\n\n`;
+    message += `*Produits :*\n`;
+    cart.forEach(item => message += `- ${item.name} (${item.price.toLocaleString()} FCFA)\n`);
+    const total = cart.reduce((s, item) => s + item.price, 0);
+    message += `\n*Total : ${total.toLocaleString()} FCFA.*`;
 
-let cards=document.querySelectorAll(".card")
-
-cards.forEach(card=>{
-
-let title=card.querySelector("h3").textContent.toLowerCase()
-
-card.style.display=title.includes(input) ? "block":"none"
-
-})
-
+    waLink = `https://wa.me/24166366683?text=${encodeURIComponent(message)}`;
+    document.getElementById('confirm-modal').style.display = 'flex';
 }
 
-
-
-function showCheckout(){
-
-if(cart.length==0){
-
-alert("Panier vide")
-
-return
-
+function finalWhatsAppRedirect() {
+    window.open(waLink, '_blank');
+    document.getElementById('confirm-modal').style.display = 'none';
+    cart = []; updateUI(); toggleCart();
 }
 
-document.getElementById("checkout").style.display="block"
-
-}
-
-function confirmOrder(){
-
-let name=document.getElementById("customerName").value
-let phone=document.getElementById("phone").value
-let city=document.getElementById("city").value
-let address=document.getElementById("address").value
-
-let total=document.getElementById("total").textContent
-
-let message="Nouvelle commande ER Boutique %0A%0A"
-
-message+="Nom : "+name+"%0A"
-message+="Téléphone : "+phone+"%0A"
-message+="Ville : "+city+"%0A"
-message+="Adresse : "+address+"%0A%0A"
-
-message+="Produits : %0A"
-
-cart.forEach(p=>{
-message+="- "+p.name+" ("+p.price+"Fcfa)%0A"
-})
-
-message+="%0ATotal : "+total+"Fcfa"
-
-let numero="+24166366683"
-
-let url="https://wa.me/24166366683"+numero+"?text="+message
-
-window.open(url)
-
-}
-
-
-
-
-function generateInvoice(order){
-
-let text="FACTURE ER BOUTIQUE\n\n"
-
-text+="Client : "+order.name+"\n"
-
-text+="Ville : "+order.city+"\n"
-
-text+="Date : "+order.date+"\n\n"
-
-order.cart.forEach(p=>{
-
-text+=p.name+" - "+p.price+"Fcfa\n"
-
-})
-
-text+="\nTotal : "+order.total+"Fcfa"
-
-alert(text)
-
-}
-
-
-
-function loginAdmin(){
-
-let pass=document.getElementById("adminPass").value
-
-if(pass===adminPassword){
-
-document.getElementById("adminPanel").style.display="block"
-
-loadDashboard()
-
-showOrders()
-
-}
-
-else{
-
-alert("Mot de passe incorrect")
-
-}
-
-}
-
-
-
-function addProduct(){
-
-let name=document.getElementById("name").value
-
-let price=parseFloat(document.getElementById("price").value)
-
-let stock=parseInt(document.getElementById("stock").value)
-
-let image=document.getElementById("image").value
-
-products.push({name,price,stock,image})
-
-renderProducts()
-
-loadDashboard()
-
-}
-
-
-
-function showOrders(){
-
-let list=document.getElementById("orders")
-
-list.innerHTML=""
-
-orders.forEach(o=>{
-
-let li=document.createElement("li")
-
-li.textContent=o.name+" | "+o.city+" | "+o.total+"€"
-
-list.appendChild(li)
-
-})
-
-}
-
-
-
-function loadDashboard(){
-
-document.getElementById("totalProducts").textContent=products.length
-
-document.getElementById("totalOrders").textContent=orders.length
-
-}
-
-
-
-renderProducts()
+init();
