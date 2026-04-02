@@ -10,71 +10,128 @@
 <body>
 
     <header>
-        <nav>
-            <div class="logo-container">
-                <a href="index.html">
-                    <img src="logo.png" alt="ER-boutiques Logo" class="client-logo">
-                </a>
+        <nav class="top-nav">
+            <div class="logo">
+                <img src="logo.png" alt="ER-boutiques">
             </div>
-            <div class="cart-icon" onclick="toggleCart()">
-                <i data-lucide="shopping-bag"></i>
-                <span id="cart-count">0</span>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Accueil</a></li>
+                <li><a href="#">Filles</a></li>
+                <li><a href="#">Bébés</a></li>
+                <li><a href="#">Garçons</a></li>
+                <li><a href="#">Nouveautés</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <div class="search-container">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Rechercher un produit...">
+                </div>
+                <i data-lucide="user"></i>
+                <div class="cart-trigger">
+                    <i data-lucide="shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <h2>Mode Enfantine & Bébé</h2>
-            <p>Livraison à Libreville et Ntoum</p>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Mode Enfantine & Bébé</h1>
+                <p class="location"><i data-lucide="map-pin"></i> Livraison à Libreville et Ntoum</p>
+                <a href="#produits" class="btn-primary">Découvrir la collection <i data-lucide="arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <img src="logo collection enfants/Image enfant.png" alt="Collection Enfants">
+            </div>
         </section>
 
-        <div class="products-grid" id="products-container"></div>
+        <section class="features">
+            <div class="feature-card">
+                <div class="icon-box"><i data-lucide="truck"></i></div>
+                <div>
+                    <h4>Livraison rapide</h4>
+                    <p>À Libreville et Ntoum en 24h - 48h</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box pink"><i data-lucide="shield-check"></i></div>
+                <div>
+                    <h4>Produits de qualité</h4>
+                    <p>Des vêtements doux et résistants</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box blue"><i data-lucide="credit-card"></i></div>
+                <div>
+                    <h4>Paiement sécurisé</h4>
+                    <p>Payez à la livraison ou en ligne</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="produits" class="products-section">
+            <div class="section-header">
+                <h2>Nos Produits</h2>
+                <div class="filters">
+                    <button class="filter-btn active">Tous</button>
+                    <button class="filter-btn">Filles</button>
+                    <button class="filter-btn">Bébés</button>
+                    <button class="filter-btn">Garçons</button>
+                </div>
+            </div>
+            <div class="products-grid" id="products-container"></div>
+        </section>
+
+        <section class="newsletter-banner">
+            <div class="nb-content">
+                <div class="nb-icon"><i data-lucide="tag"></i></div>
+                <div>
+                    <h4>Nouveautés chaque semaine</h4>
+                    <p>Découvrez régulièrement de nouveaux styles pour vos enfants.</p>
+                </div>
+            </div>
+            <button class="btn-outline">Voir les nouveautés <i data-lucide="arrow-right"></i></button>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 ER-boutiques. Tous droits réservés.</p>
-        <p class="signature">Développé par <strong>NEJ-Dev</strong></p>
+        <div class="footer-grid">
+            <div class="footer-info">
+                <img src="logo.png" alt="Logo" class="footer-logo">
+                <p>Mode enfantine tendance et accessible à Libreville et Ntoum.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Liens utiles</h4>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Livraison & Retours</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Nous contacter</h4>
+                <p><i data-lucide="phone"></i> +241 66366683</p>
+                <p><i data-lucide="mail"></i> contact@er-boutiques.com</p>
+                <p><i data-lucide="map-pin"></i> Libreville & Ntoum, Gabon</p>
+            </div>
+            <div class="footer-social">
+                <h4>Suivez-nous</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="fb.png" alt="Facebook" class="social-img"></a>
+                    <a href="#"><img src="inst.png" alt="Instagram" class="social-img"></a>
+                    <a href="#"><img src="wa.png" alt="WhatsApp" class="social-img"></a>
+                    <a href="#"><img src="tik.png" alt="Tiktok" class="social-img"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ER-boutiques. Tous droits réservés.</p>
+            <p class="signature">Développé par <strong>NEJ-Dev</strong></p>
+        </div>
     </footer>
-
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Ma Commande</h3>
-            <button class="close-cart" onclick="toggleCart()">&times;</button>
-        </div>
-        <div id="cart-items-list"></div>
-        <div class="cart-footer">
-            <div class="delivery-form">
-                <h4>Livraison</h4>
-                <input type="text" id="cust-name" placeholder="Nom complet">
-                <input type="tel" id="cust-phone" placeholder="Téléphone">
-                <select id="cust-city" onchange="updateQuarters()">
-                    <option value="">Choisir la ville</option>
-                    <option value="Libreville">Libreville</option>
-                    <option value="Ntoum">Ntoum</option>
-                </select>
-                <select id="cust-quarter">
-                    <option value="">Choisir le quartier</option>
-                </select>
-            </div>
-            <div class="total-container">
-                <span>Total :</span>
-                <span id="cart-total">0</span> FCFA
-            </div>
-            <button class="btn-whatsapp" onclick="sendOrder()">
-                <i data-lucide="message-circle"></i> Commander sur WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <div id="confirm-modal" class="modal">
-        <div class="modal-content">
-            <i data-lucide="check-circle" class="success-icon"></i>
-            <h3>Commande prête !</h3>
-            <p>Envoi vers le WhatsApp Business (+241 66366683).</p>
-            <button class="btn-confirm" onclick="finalWhatsAppRedirect()">Confirmer</button>
-        </div>
-    </div>
 
     <script src="script.js"></script>
     <script>lucide.createIcons();</script>
