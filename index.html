@@ -3,137 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ER-boutiques | Mode Enfantine</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="description" content="ER-boutiques - Mode Enfantine & Bébé à Libreville et Ntoum">
+    <title>ER-boutiques | Mode Enfantine &amp; Bébé</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-    <header>
-        <nav class="top-nav">
-            <div class="logo">
-                <img src="logo.png" alt="ER-boutiques">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Accueil</a></li>
-                <li><a href="#">Filles</a></li>
-                <li><a href="#">Bébés</a></li>
-                <li><a href="#">Garçons</a></li>
-                <li><a href="#">Nouveautés</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="nav-icons">
-                <div class="search-container">
-                    <i data-lucide="search"></i>
-                    <input type="text" placeholder="Rechercher un produit...">
+    <!-- HEADER -->
+    <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-x-3">
+                    <img src="logo.png" alt="ER-boutiques" class="h-10 sm:h-12 w-auto">
                 </div>
-                <i data-lucide="user"></i>
-                <div class="cart-trigger">
-                    <i data-lucide="shopping-bag"></i>
-                    <span id="cart-count">0</span>
-                </div>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1>Mode Enfantine & Bébé</h1>
-                <p class="location"><i data-lucide="map-pin"></i> Livraison à Libreville et Ntoum</p>
-                <a href="#produits" class="btn-primary">Découvrir la collection <i data-lucide="arrow-right"></i></a>
-            </div>
-            <div class="hero-image">
-                <img src="logo collection enfants/Image enfant.png" alt="Collection Enfants">
-            </div>
-        </section>
+                <nav class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm font-medium">
+                    <a href="#" onclick="navigateToSection('accueil')" class="nav-link active text-teal-600">Accueil</a>
+                    <a href="#" onclick="filterCategory('filles')" class="nav-link text-gray-700 hover:text-teal-600">Filles</a>
+                    <a href="#" onclick="filterCategory('bebes')" class="nav-link text-gray-700 hover:text-teal-600">Bébés</a>
+                    <a href="#" onclick="filterCategory('garcons')" class="nav-link text-gray-700 hover:text-teal-600">Garçons</a>
+                    <a href="#" onclick="navigateToSection('nouveautes')" class="nav-link text-gray-700 hover:text-teal-600">Nouveautés</a>
+                    <a href="#" onclick="navigateToSection('contact')" class="nav-link text-gray-700 hover:text-teal-600">Contact</a>
+                </nav>
 
-        <section class="features">
-            <div class="feature-card">
-                <div class="icon-box"><i data-lucide="truck"></i></div>
-                <div>
-                    <h4>Livraison rapide</h4>
-                    <p>À Libreville et Ntoum en 24h - 48h</p>
-                </div>
-            </div>
-            <div class="feature-card">
-                <div class="icon-box pink"><i data-lucide="shield-check"></i></div>
-                <div>
-                    <h4>Produits de qualité</h4>
-                    <p>Des vêtements doux et résistants</p>
-                </div>
-            </div>
-            <div class="feature-card">
-                <div class="icon-box blue"><i data-lucide="credit-card"></i></div>
-                <div>
-                    <h4>Paiement sécurisé</h4>
-                    <p>Payez à la livraison ou en ligne</p>
-                </div>
-            </div>
-        </section>
+                <div class="flex items-center gap-x-3 sm:gap-x-4">
+                    <div class="relative hidden sm:block">
+                        <input id="search-input" type="text" placeholder="Rechercher un produit..." 
+                               class="bg-gray-100 border border-transparent focus:border-teal-300 w-60 lg:w-72 pl-10 pr-4 py-2.5 rounded-3xl text-sm focus:outline-none">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-400"></i>
+                    </div>
 
-        <section id="produits" class="products-section">
-            <div class="section-header">
-                <h2>Nos Produits</h2>
-                <div class="filters">
-                    <button class="filter-btn active">Tous</button>
-                    <button class="filter-btn">Filles</button>
-                    <button class="filter-btn">Bébés</button>
-                    <button class="filter-btn">Garçons</button>
-                </div>
-            </div>
-            <div class="products-grid" id="products-container"></div>
-        </section>
+                    <button onclick="alert('Connexion bientôt disponible !')" class="w-9 h-9 flex items-center justify-center rounded-2xl hover:bg-gray-100">
+                        <i class="fa-solid fa-user text-xl text-gray-700"></i>
+                    </button>
 
-        <section class="newsletter-banner">
-            <div class="nb-content">
-                <div class="nb-icon"><i data-lucide="tag"></i></div>
-                <div>
-                    <h4>Nouveautés chaque semaine</h4>
-                    <p>Découvrez régulièrement de nouveaux styles pour vos enfants.</p>
-                </div>
-            </div>
-            <button class="btn-outline">Voir les nouveautés <i data-lucide="arrow-right"></i></button>
-        </section>
-    </main>
+                    <button onclick="toggleCart()" class="relative flex items-center justify-center w-9 h-9 hover:bg-gray-100 rounded-2xl">
+                        <i class="fa-solid fa-shopping-cart text-xl text-gray-700"></i>
+                        <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-pink-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                    </button>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-info">
-                <img src="logo.png" alt="Logo" class="footer-logo">
-                <p>Mode enfantine tendance et accessible à Libreville et Ntoum.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Liens utiles</h4>
-                <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">À propos</a></li>
-                    <li><a href="#">Livraison & Retours</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Nous contacter</h4>
-                <p><i data-lucide="phone"></i> +241 66366683</p>
-                <p><i data-lucide="mail"></i> contact@er-boutiques.com</p>
-                <p><i data-lucide="map-pin"></i> Libreville & Ntoum, Gabon</p>
-            </div>
-            <div class="footer-social">
-                <h4>Suivez-nous</h4>
-                <div class="social-icons">
-                    <a href="#"><img src="fb.png" alt="Facebook" class="social-img"></a>
-                    <a href="#"><img src="inst.png" alt="Instagram" class="social-img"></a>
-                    <a href="#"><img src="wa.png" alt="WhatsApp" class="social-img"></a>
-                    <a href="#"><img src="tik.png" alt="Tiktok" class="social-img"></a>
+                    <button onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 flex items-center justify-center">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-2xl text-gray-700"></i>
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 ER-boutiques. Tous droits réservés.</p>
-            <p class="signature">Développé par <strong>NEJ-Dev</strong></p>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-5">
+            <div class="flex flex-col gap-y-4 text-base font-medium">
+                <a href="#" onclick="navigateToSection('accueil');toggleMobileMenu()" class="py-2">Accueil</a>
+                <a href="#" onclick="filterCategory('filles');toggleMobileMenu()" class="py-2">Filles</a>
+                <a href="#" onclick="filterCategory('bebes');toggleMobileMenu()" class="py-2">Bébés</a>
+                <a href="#" onclick="filterCategory('garcons');toggleMobileMenu()" class="py-2">Garçons</a>
+                <a href="#" onclick="navigateToSection('nouveautes');toggleMobileMenu()" class="py-2">Nouveautés</a>
+                <a href="#" onclick="navigateToSection('contact');toggleMobileMenu()" class="py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO avec ton image PNG -->
+    <section id="accueil" class="pt-8 pb-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+                <div class="md:col-span-7 text-center md:text-left">
+                    <div class="inline-flex items-center gap-x-2 bg-white px-5 py-2 rounded-3xl text-sm font-medium text-teal-700 mb-6 shadow-sm">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <span>Livraison à Libreville et Ntoum</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold leading-none tracking-tighter text-gray-900 mb-6">
+                        Mode Enfantine<br>&amp; Bébé
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-md mx-auto md:mx-0">
+                        Des vêtements doux, confortables et tendances pour vos petits trésors.
+                    </p>
+                    <button onclick="document.getElementById('nos-produits').scrollIntoView({ behavior: 'smooth' })" 
+                            class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-3xl flex items-center gap-x-3 font-semibold text-base sm:text-lg mx-auto md:mx-0 shadow-lg transition-all">
+                        Découvrir la collection 
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- TON IMAGE PNG -->
+                <div class="md:col-span-5">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white p-3">
+                        <img src="hero-image.png" 
+                             alt="Collection Mode Enfantine ER-boutiques"
+                             class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-3xl p-6 flex gap-4 shadow-lg">
+                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl">🚚</div>
+                <div>
+                    <h3 class="font-semibold text-lg">Livraison rapide</h3>
+                    <p class="text-gray-600 text-sm mt-1">À Libreville et Ntoum en 24h - 48h</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 flex gap-4 shadow-lg">
+                <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center text-3xl">🛡️</div>
+                <div>
+                    <h3 class="font-semibold text-lg">Produits de qualité</h3>
+                    <p class="text-gray-600 text-sm mt-1">Vêtements doux, confortables et résistants.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 flex gap-4 shadow-lg">
+                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl">💳</div>
+                <div>
+                    <h3 class="font-semibold text-lg">Paiement sécurisé</h3>
+                    <p class="text-gray-600 text-sm mt-1">Paiement à la livraison ou en ligne.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOS PRODUITS -->
+    <section id="nos-produits" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+        <div class="flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-4 mb-8">
+            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">Nos Produits</h2>
+            <div class="flex bg-gray-100 rounded-3xl p-1 text-sm font-medium w-full sm:w-auto overflow-x-auto">
+                <button onclick="filterCategory('tous')" id="tab-tous" class="tab-button active px-6 py-2 rounded-3xl whitespace-nowrap">Tous</button>
+                <button onclick="filterCategory('filles')" id="tab-filles" class="tab-button px-6 py-2 rounded-3xl whitespace-nowrap">Filles</button>
+                <button onclick="filterCategory('bebes')" id="tab-bebes" class="tab-button px-6 py-2 rounded-3xl whitespace-nowrap">Bébés</button>
+                <button onclick="filterCategory('garcons')" id="tab-garcons" class="tab-button px-6 py-2 rounded-3xl whitespace-nowrap">Garçons</button>
+            </div>
+        </div>
+        <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- NOUVEAUTÉS -->
+    <section id="nouveautes" class="bg-gradient-to-r from-pink-50 to-teal-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-x-4">
+                    <div class="bg-white text-pink-500 px-4 py-2 rounded-2xl shadow flex items-center gap-x-2 text-sm font-semibold">
+                        <i class="fa-solid fa-tag"></i>
+                        <span>Nouveautés chaque semaine</span>
+                    </div>
+                    <p class="text-lg font-medium text-gray-700">Découvrez régulièrement de nouveaux styles pour vos enfants.</p>
+                </div>
+                <button onclick="alert('Les nouveautés seront bientôt disponibles !')" 
+                        class="bg-white hover:bg-teal-50 border border-teal-200 px-8 py-4 rounded-3xl flex items-center gap-x-3 font-semibold text-teal-700">
+                    Voir les nouveautés <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CART DRAWER -->
+    <div onclick="if(event.target.id === 'cart-backdrop') toggleCart()" id="cart-backdrop" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]">
+        <div onclick="event.stopImmediatePropagation()" id="cart-drawer" class="cart-drawer fixed top-0 bottom-0 right-0 w-full max-w-md bg-white shadow-2xl flex flex-col">
+            <div class="px-6 py-6 border-b flex items-center justify-between">
+                <h3 class="text-2xl font-semibold">Votre panier</h3>
+                <button onclick="toggleCart()" class="text-3xl leading-none text-gray-400 hover:text-gray-700">×</button>
+            </div>
+            <div id="cart-items" class="flex-1 p-6 overflow-auto space-y-6"></div>
+            <div class="border-t p-6 space-y-4">
+                <div class="flex justify-between text-xl">
+                    <span class="font-medium">Total</span>
+                    <span id="cart-total" class="font-semibold">0 FCFA</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="w-full bg-teal-600 hover:bg-teal-700 text-white py-4 rounded-3xl text-lg font-semibold flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-whatsapp"></i>
+                    Passer la commande sur WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div onclick="if(event.target.id === 'checkout-modal') hideCheckout()" id="checkout-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[10000]">
+        <div onclick="event.stopImmediatePropagation()" class="modal bg-white rounded-3xl max-w-lg w-full mx-4 overflow-hidden">
+            <div class="px-8 pt-8 pb-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-semibold">Finaliser votre commande</h3>
+                    <button onclick="hideCheckout()" class="text-4xl text-gray-300 hover:text-gray-500">×</button>
+                </div>
+                <form id="checkout-form" onsubmit="handleCheckout(event)">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Nom complet</label>
+                            <input type="text" id="nom" class="w-full border border-gray-200 focus:border-teal-400 rounded-2xl px-5 py-4 outline-none" placeholder="Votre nom" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Numéro de téléphone</label>
+                            <input type="tel" id="telephone" class="w-full border border-gray-200 focus:border-teal-400 rounded-2xl px-5 py-4 outline-none" placeholder="+241 66 36 66 83" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Ville</label>
+                            <select id="ville-select" onchange="updateQuartiers()" class="w-full border border-gray-200 focus:border-teal-400 rounded-2xl px-5 py-4 outline-none" required>
+                                <option value="">Sélectionnez votre ville</option>
+                                <option value="Libreville">Libreville</option>
+                                <option value="Akanda">Akanda</option>
+                                <option value="Ntoum">Ntoum</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Quartier</label>
+                            <select id="quartier-select" class="w-full border border-gray-200 focus:border-teal-400 rounded-2xl px-5 py-4 outline-none" required></select>
+                        </div>
+                    </div>
+                    <div class="mt-10 flex gap-3">
+                        <button type="button" onclick="hideCheckout()" class="flex-1 py-4 border border-gray-300 font-medium rounded-3xl">Annuler</button>
+                        <button type="submit" class="flex-1 bg-gradient-to-r from-green-500 to-teal-600 text-white py-4 rounded-3xl font-semibold flex items-center justify-center gap-x-3 whatsapp-btn">
+                            <i class="fa-solid fa-whatsapp text-xl"></i>
+                            Envoyer sur WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-white pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-y-10">
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <img src="logo.png" alt="ER-boutiques" class="h-10 w-auto">
+                    </div>
+                    <p class="text-gray-400">Mode enfantine tendance et accessible à Libreville et Ntoum.</p>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-medium mb-4">Liens utiles</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white">Accueil</a></li>
+                        <li><a href="#" class="hover:text-white">À propos</a></li>
+                        <li><a href="#" class="hover:text-white">Livraison &amp; Retours</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="font-medium mb-4">Nous contacter</h4>
+                    <div class="space-y-3 text-sm">
+                        <a href="tel:+24166366683" class="flex items-center gap-x-3 hover:text-teal-400"><i class="fa-solid fa-phone"></i> +241 66 36 66 83</a>
+                        <a href="mailto:contact@er-boutiques.com" class="flex items-center gap-x-3 hover:text-teal-400"><i class="fa-solid fa-envelope"></i> contact@er-boutiques.com</a>
+                        <div class="flex items-center gap-x-3"><i class="fa-solid fa-location-dot"></i> Libreville &amp; Ntoum, Gabon</div>
+                    </div>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="font-medium mb-4">Suivez-nous</h4>
+                    <div class="flex gap-x-4">
+                        <a href="#" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-[#1877F2] flex items-center justify-center rounded-2xl text-2xl text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-gradient-to-r hover:from-[#f56040] hover:to-[#c13584] flex items-center justify-center rounded-2xl text-2xl text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-black flex items-center justify-center rounded-2xl text-2xl text-white"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/24166366683" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-[#25D366] flex items-center justify-center rounded-2xl text-2xl text-white"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-500 mt-16 border-t border-gray-800 pt-8">
+                © 2026 ER-boutiques. Tous droits réservés.<br>
+                Développé par <strong>NEJ-Dev</strong>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
 </body>
 </html>

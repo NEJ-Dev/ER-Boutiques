@@ -1,99 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 :root {
-    --primary: #00ecc8;
-    --accent: #e8648c;
-    --light-blue: #f0f9f8;
-    --dark: #1e72f0;
-    --white: #ffffff;
-    --gray: #8db6ef;
+    --primary: #14b8a6;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-body { background-color: var(--white); color: var(--dark); line-height: 1.6; }
-
-/* HEADER */
-header {
-    background: var(--white);
-    padding: 15px 5%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+* {
+    font-family: 'Poppins', system_ui, sans-serif;
 }
 
-.top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
+.hero-bg {
+    background: linear-gradient(90deg, #a5f3fc 0%, #e0f2fe 100%);
 }
 
-.logo img { height: 50px; }
-.nav-links { display: flex; list-style: none; gap: 25px; }
-.nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; }
-.nav-links a.active, .nav-links a:hover { color: var(--primary); }
-
-.nav-icons { display: flex; align-items: center; gap: 20px; color: var(--gray); }
-.search-container { position: relative; display: flex; align-items: center; }
-.search-container input { padding: 8px 15px 8px 35px; border-radius: 20px; border: 1px solid #eee; outline: none; }
-.search-container i { position: absolute; left: 10px; width: 18px; }
-
-.cart-trigger { position: relative; color: var(--accent); cursor: pointer; }
-#cart-count { position: absolute; top: -8px; right: -10px; background: var(--accent); color: white; font-size: 11px; padding: 2px 6px; border-radius: 50%; }
-
-/* HERO */
-.hero-section {
-    background-color: var(--light-blue);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px 10%;
-    border-radius: 0 0 60px 60px;
+.product-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hero-content h1 { font-size: 3.2rem; line-height: 1.1; margin-bottom: 20px; }
-.btn-primary { background: var(--accent); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; }
-.btn-primary:hover { transform: scale(1.05); }
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
 
-/* FEATURES */
-.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 0 10%; margin-top: -40px; }
-.feature-card { background: var(--white); padding: 25px; border-radius: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-.icon-box { background: #e2f6f3; color: var(--primary); padding: 12px; border-radius: 12px; }
-.icon-box.pink { background: #fee2e9; color: var(--accent); }
-.icon-box.blue { background: #e0f2fe; color: #0284c7; }
+.cart-drawer {
+    animation: slideIn 0.3s ease-out forwards;
+}
 
-/* PRODUITS */
-.products-section { padding: 80px 10%; }
-.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-.filter-btn { padding: 10px 25px; border-radius: 25px; border: 1px solid #eee; background: white; cursor: pointer; transition: 0.3s; }
-.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
 
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-.product-card { background: white; padding: 20px; border-radius: 20px; text-align: center; border: 1px solid #f8f8f8; transition: 0.3s; }
-.product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-.product-card img { width: 100%; height: 280px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
-.price-tag { color: var(--accent); font-weight: 800; font-size: 1.3rem; margin: 10px 0; }
-.btn-add-cart { background: #e2f6f3; color: var(--primary); border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; gap: 8px; }
+.modal {
+    animation: modalPop 0.3s ease-out forwards;
+}
 
-/* FOOTER */
-footer { background: #f8fafc; padding: 80px 10% 30px; border-top: 1px solid #eee; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr 1fr; gap: 40px; max-width: 1400px; margin: 0 auto; }
-.footer-logo { height: 45px; margin-bottom: 15px; }
-.footer-links ul { list-style: none; }
-.footer-links li { margin-bottom: 10px; }
-.footer-links a { text-decoration: none; color: var(--gray); font-size: 0.95rem; }
-.social-icons { display: flex; gap: 15px; margin-top: 15px; }
-.social-img { width: 32px; height: 32px; transition: 0.3s; }
-.footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #e2e8f0; color: var(--gray); }
-.signature strong { color: var(--primary); }
+.nav-link {
+    position: relative;
+}
 
-/* MOBILE */
-@media (max-width: 768px) {
-    .hero-section { flex-direction: column; text-align: center; padding: 40px 5%; }
-    .hero-image img { max-width: 300px; margin-top: 30px; }
-    .features { grid-template-columns: 1fr; padding: 0 5%; }
-    .footer-grid { grid-template-columns: 1fr; text-align: center; }
-    .social-icons { justify-content: center; }
-    .nav-links { display: none; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -2px;
+    left: 0;
+    background-color: #14b8a6;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover:after,
+.nav-link.active:after {
+    width: 100%;
+}
+
+.whatsapp-btn {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.tab-button.active {
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
